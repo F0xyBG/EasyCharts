@@ -12,9 +12,8 @@ import CardStatisticsVerticalComponent from 'src/@core/components/card-statistic
 
 // ** Styled Component Import
 import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
-import Chart from 'chart.js/auto';
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from 'react'
 
 // ** Demo Components Imports
 import Table from 'src/views/dashboard/Table'
@@ -26,32 +25,28 @@ import DepositWithdraw from 'src/views/dashboard/DepositWithdraw'
 import SalesByCountries from 'src/views/dashboard/SalesByCountries'
 
 const Dashboard = () => {
-
   const lineChartOptions: object = {
-    maintainAsceptRatio: false,
-    aspectRatio: 5, // You can adjust the aspectRatio as needed
+    maintainAspectRatio: true,
     scales: {
-      x: {
-  
-      },
+      x: {},
       y: {
         type: 'linear',
         display: true,
-        position: "left"
+        position: 'left'
       }
     },
     responsive: true,
     plugins: {
       legend: {
-        position: 'bottom',
+        position: 'bottom'
       },
       title: {
-      	display: true,
-      	text: 'Chart.js Line Chart'
+        display: true,
+        text: 'Chart.js Line Chart'
       }
     }
   }
-  
+
   return (
     <ApexChartWrapper>
       <Grid container spacing={6}>
@@ -62,10 +57,10 @@ const Dashboard = () => {
           <StatisticsCard />
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-          <WeeklyOverview 
-            lineChartLabels={['babati', 'lelqti', 'chichoti']} 
-            lineChartData={[1, 3, 5]} 
-            lineChartOptions={lineChartOptions} 
+          <WeeklyOverview
+            lineChartLabels={['babati', 'lelqti', 'chichoti']}
+            lineChartData={[1, 3, 5]}
+            lineChartOptions={lineChartOptions}
           />
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
