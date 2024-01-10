@@ -20,33 +20,15 @@ import Table from 'src/views/dashboard/Table'
 import Trophy from 'src/views/dashboard/Trophy'
 import TotalEarning from 'src/views/dashboard/TotalEarning'
 import StatisticsCard from 'src/views/dashboard/StatisticsCard'
-import WeeklyOverview from 'src/views/dashboard/WeeklyOverview'
+// import WeeklyOverview from 'src/views/dashboard/WeeklyOverview'
+import LineChart from 'src/views/charts/LineChart'
+import BarChart from 'src/views/charts/BarChart'
+import PieChart from 'src/views/charts/PieChart'
 import DepositWithdraw from 'src/views/dashboard/DepositWithdraw'
 import SalesByCountries from 'src/views/dashboard/SalesByCountries'
 
 const Dashboard = () => {
-  const lineChartOptions: object = {
-    maintainAspectRatio: true,
-    scales: {
-      x: {},
-      y: {
-        type: 'linear',
-        display: true,
-        position: 'left'
-      }
-    },
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'bottom'
-      },
-      title: {
-        display: true,
-        text: 'Chart.js Line Chart'
-      }
-    }
-  }
-
+  
   return (
     <ApexChartWrapper>
       <Grid container spacing={6}>
@@ -56,15 +38,25 @@ const Dashboard = () => {
         <Grid item xs={12} md={8}>
           <StatisticsCard />
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <WeeklyOverview
+        <Grid item xs={12} md={6} lg={4} style={{display: 'grid'}}>
+          <LineChart
             lineChartLabels={['babati', 'lelqti', 'chichoti']}
             lineChartData={[1, 3, 5]}
-            lineChartOptions={lineChartOptions}
           />
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-          <TotalEarning />
+          <PieChart
+          pieChartData = {[300, 50, 100]}
+          pieChartLabels = {[
+            'Red',
+            'Blue',
+            'Yellow'
+          ]}
+          pieChartBackgroundColors = {[
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)'
+          ]} />
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <Grid container spacing={6}>
@@ -112,8 +104,11 @@ const Dashboard = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <SalesByCountries />
+        <Grid item xs={12} md={6} lg={4} style={{display: 'grid'}}>
+          <BarChart 
+          barChartLabels={['babati', 'lelqti', 'chichoti', 'dedati']}
+          barChartData={[1, 3, 5, 6]}
+           />
         </Grid>
         <Grid item xs={12} md={12} lg={8}>
           <DepositWithdraw />
