@@ -13,19 +13,18 @@ import CardStatisticsVerticalComponent from 'src/@core/components/card-statistic
 // ** Styled Component Import
 import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 // ** Demo Components Imports
 import Table from 'src/views/dashboard/Table'
 import Trophy from 'src/views/dashboard/Trophy'
-import TotalEarning from 'src/views/dashboard/TotalEarning'
 import StatisticsCard from 'src/views/dashboard/StatisticsCard'
+
 // import WeeklyOverview from 'src/views/dashboard/WeeklyOverview'
 import LineChart from 'src/views/charts/LineChart'
 import BarChart from 'src/views/charts/BarChart'
 import PieChart from 'src/views/charts/PieChart'
 import DepositWithdraw from 'src/views/dashboard/DepositWithdraw'
-import SalesByCountries from 'src/views/dashboard/SalesByCountries'
 
 const Dashboard = () => {
   

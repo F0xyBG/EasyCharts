@@ -2,6 +2,7 @@ const path = require('path')
 
 module.exports = {
   trailingSlash: true,
+  output: 'export',
   reactStrictMode: false,
   experimental: {
     esmExternals: false,

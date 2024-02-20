@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from "react";
+
+// @ts-ignore
 import Chart from "chart.js/auto"; // Import Chart.js
+
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import Button from '@mui/material/Button'
 import CardHeader from '@mui/material/CardHeader'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
 // ** Icons Imports
