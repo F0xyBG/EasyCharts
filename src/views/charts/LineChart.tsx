@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // @ts-ignore
 import Chart from "chart.js/auto"; // Import Chart.js
@@ -16,6 +16,9 @@ import DotsVertical from 'mdi-material-ui/DotsVertical'
 // ** Prime React Imports
 import { SlideMenu } from 'primereact/slidemenu';
 import { Button as PrimeReactButton } from 'primereact/button';
+import "primereact/resources/themes/lara-dark-indigo/theme.css";  //theme
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css";                                //icons
 
 type ChartProps = {
 	lineChartData: number[];
@@ -97,142 +100,362 @@ const LineChart: React.FC<ChartProps> = ({
 
 
 const menu = useRef(null);
-const items = [
-	{
-		label:'File',
-		icon:'pi pi-fw pi-file',
-		items:[
-			{
-				label:'New',
-				icon:'pi pi-fw pi-plus',
-				items:[
-				{
-					label:'Bookmark',
-					icon:'pi pi-fw pi-bookmark'
-				},
-				{
-					label:'Video',
-					icon:'pi pi-fw pi-video'
-				},
-
-				]
-			},
-			{
-				label:'Delete',
-				icon:'pi pi-fw pi-trash'
-			},
-			{
-				separator:true
-			},
-			{
-				label:'Export',
-				icon:'pi pi-fw pi-external-link'
-			}
-		]
-	},
-	{
-		label:'Edit',
-		icon:'pi pi-fw pi-pencil',
-		items:[
-			{
-				label:'Left',
-				icon:'pi pi-fw pi-align-left'
-			},
-			{
-				label:'Right',
-				icon:'pi pi-fw pi-align-right'
-			},
-			{
-				label:'Center',
-				icon:'pi pi-fw pi-align-center'
-			},
-			{
-				label:'Justify',
-				icon:'pi pi-fw pi-align-justify'
-			},
-
-		]
-	},
-	{
-		label:'Users',
-		icon:'pi pi-fw pi-user',
-		items:[
-			{
-				label:'New',
-				icon:'pi pi-fw pi-user-plus',
-
-			},
-			{
-				label:'Delete',
-				icon:'pi pi-fw pi-user-minus',
-
-			},
-			{
-				label:'Search',
-				icon:'pi pi-fw pi-users',
-				items:[
-				{
-					label:'Filter',
-					icon:'pi pi-fw pi-filter',
-					items:[
-						{
-							label:'Print',
-							icon:'pi pi-fw pi-print'
-						}
-					]
-				},
-				{
-					icon:'pi pi-fw pi-bars',
-					label:'List'
-				}
-				]
-			}
-		]
-	},
-	{
-		label:'Events',
-		icon:'pi pi-fw pi-calendar',
-		items:[
-			{
-				label:'Edit',
-				icon:'pi pi-fw pi-pencil',
-				items:[
-				{
-					label:'Save',
-					icon:'pi pi-fw pi-calendar-plus'
-				},
-				{
-					label:'Delete',
-					icon:'pi pi-fw pi-calendar-minus'
-				}
-				]
-			},
-			{
-				label:'Archieve',
-				icon:'pi pi-fw pi-calendar-times',
-				items:[
-				{
-					label:'Remove',
-					icon:'pi pi-fw pi-calendar-minus'
-				}
-				]
-			}
-		]
-	},
-	{
-		separator:true
-	},
-	{
-		label:'Quit',
-		icon:'pi pi-fw pi-power-off'
-	}
-];
+// const items = [
+// 	{
+// 	  "label": "company: Tech Enterprises"
+// 	},
+// 	{
+// 	  "label": "employees",
+// 	  "items": [
+// 		{
+// 		  "label": "0",
+// 		  "items": [
+// 			{
+// 			  "label": "name: John Doe"
+// 			},
+// 			{
+// 			  "label": "department: Engineering"
+// 			},
+// 			{
+// 			  "label": "skills",
+// 			  "items": [
+// 				{
+// 				  "label": "0: JavaScript"
+// 				},
+// 				{
+// 				  "label": "1: Python"
+// 				},
+// 				{
+// 				  "label": "2: React"
+// 				}
+// 			  ]
+// 			},
+// 			{
+// 			  "label": "manager",
+// 			  "items": [
+// 				{
+// 				  "label": "name: Alice Smith"
+// 				},
+// 				{
+// 				  "label": "department: Engineering Manager"
+// 				},
+// 				{
+// 				  "label": "contact",
+// 				  "items": [
+// 					{
+// 					  "label": "email: alice@techenterprises.com"
+// 					},
+// 					{
+// 					  "label": "phone: +1234567890"
+// 					}
+// 				  ]
+// 				}
+// 			  ]
+// 			}
+// 		  ]
+// 		},
+// 		{
+// 		  "label": "1",
+// 		  "items": [
+// 			{
+// 			  "label": "name: Jane Smith"
+// 			},
+// 			{
+// 			  "label": "department: Marketing"
+// 			},
+// 			{
+// 			  "label": "skills",
+// 			  "items": [
+// 				{
+// 				  "label": "0: Social Media Marketing"
+// 				},
+// 				{
+// 				  "label": "1: Content Writing"
+// 				}
+// 			  ]
+// 			},
+// 			{
+// 			  "label": "manager",
+// 			  "items": [
+// 				{
+// 				  "label": "name: Bob Johnson"
+// 				},
+// 				{
+// 				  "label": "department: Marketing Manager"
+// 				},
+// 				{
+// 				  "label": "contact",
+// 				  "items": [
+// 					{
+// 					  "label": "email: bob@techenterprises.com"
+// 					},
+// 					{
+// 					  "label": "phone: +1987654321"
+// 					}
+// 				  ]
+// 				}
+// 			  ]
+// 			}
+// 		  ]
+// 		}
+// 	  ]
+// 	},
+// 	{
+// 	  "label": "projects",
+// 	  "items": [
+// 		{
+// 		  "label": "0",
+// 		  "items": [
+// 			{
+// 			  "label": "name: Project X"
+// 			},
+// 			{
+// 			  "label": "description: Developing a new software product"
+// 			},
+// 			{
+// 			  "label": "team",
+// 			  "items": [
+// 				{
+// 				  "label": "0",
+// 				  "items": [
+// 					{
+// 					  "label": "name: David Brown"
+// 					},
+// 					{
+// 					  "label": "role: Lead Developer"
+// 					},
+// 					{
+// 					  "label": "skills",
+// 					  "items": [
+// 						{
+// 						  "label": "0: Java"
+// 						},
+// 						{
+// 						  "label": "1: Spring Boot"
+// 						},
+// 						{
+// 						  "label": "2: MySQL"
+// 						}
+// 					  ]
+// 					},
+// 					{
+// 					  "label": "manager",
+// 					  "items": [
+// 						{
+// 						  "label": "name: John Doe"
+// 						},
+// 						{
+// 						  "label": "department: Engineering"
+// 						},
+// 						{
+// 						  "label": "contact",
+// 						  "items": [
+// 							{
+// 							  "label": "email: john@techenterprises.com"
+// 							},
+// 							{
+// 							  "label": "phone: +1122334455"
+// 							}
+// 						  ]
+// 						}
+// 					  ]
+// 					}
+// 				  ]
+// 				},
+// 				{
+// 				  "label": "1",
+// 				  "items": [
+// 					{
+// 					  "label": "name: Emily White"
+// 					},
+// 					{
+// 					  "label": "role: UX Designer"
+// 					},
+// 					{
+// 					  "label": "skills",
+// 					  "items": [
+// 						{
+// 						  "label": "0: UI/UX Design"
+// 						},
+// 						{
+// 						  "label": "1: Adobe XD"
+// 						}
+// 					  ]
+// 					},
+// 					{
+// 					  "label": "manager",
+// 					  "items": [
+// 						{
+// 						  "label": "name: Jane Smith"
+// 						},
+// 						{
+// 						  "label": "department: Marketing"
+// 						},
+// 						{
+// 						  "label": "contact",
+// 						  "items": [
+// 							{
+// 							  "label": "email: jane@techenterprises.com"
+// 							},
+// 							{
+// 							  "label": "phone: +2233445566"
+// 							}
+// 						  ]
+// 						}
+// 					  ]
+// 					}
+// 				  ]
+// 				}
+// 			  ]
+// 			}
+// 		  ]
+// 		},
+// 		{
+// 		  "label": "1",
+// 		  "items": [
+// 			{
+// 			  "label": "name: Project Y"
+// 			},
+// 			{
+// 			  "label": "description: Marketing Campaign for New Product Launch"
+// 			},
+// 			{
+// 			  "label": "team",
+// 			  "items": [
+// 				{
+// 				  "label": "0",
+// 				  "items": [
+// 					{
+// 					  "label": "name: Michael Green"
+// 					},
+// 					{
+// 					  "label": "role: Campaign Manager"
+// 					},
+// 					{
+// 					  "label": "skills",
+// 					  "items": [
+// 						{
+// 						  "label": "0: Marketing Strategy"
+// 						},
+// 						{
+// 						  "label": "1: Campaign Planning"
+// 						}
+// 					  ]
+// 					},
+// 					{
+// 					  "label": "manager",
+// 					  "items": [
+// 						{
+// 						  "label": "name: Jane Smith"
+// 						},
+// 						{
+// 						  "label": "department: Marketing"
+// 						},
+// 						{
+// 						  "label": "contact",
+// 						  "items": [
+// 							{
+// 							  "label": "email: jane@techenterprises.com"
+// 							},
+// 							{
+// 							  "label": "phone: +2233445566"
+// 							}
+// 						  ]
+// 						}
+// 					  ]
+// 					}
+// 				  ]
+// 				},
+// 				{
+// 				  "label": "1",
+// 				  "items": [
+// 					{
+// 					  "label": "name: Sophia Lee"
+// 					},
+// 					{
+// 					  "label": "role: Content Creator"
+// 					},
+// 					{
+// 					  "label": "skills",
+// 					  "items": [
+// 						{
+// 						  "label": "0: Copywriting"
+// 						},
+// 						{
+// 						  "label": "1: SEO"
+// 						}
+// 					  ]
+// 					},
+// 					{
+// 					  "label": "manager",
+// 					  "items": [
+// 						{
+// 						  "label": "name: Bob Johnson"
+// 						},
+// 						{
+// 						  "label": "department: Marketing Manager"
+// 						},
+// 						{
+// 						  "label": "contact",
+// 						  "items": [
+// 							{
+// 							  "label": "email: bob@techenterprises.com"
+// 							},
+// 							{
+// 							  "label": "phone: +1987654321"
+// 							}
+// 						  ]
+// 						}
+// 					  ]
+// 					}
+// 				  ]
+// 				}
+// 			  ]
+// 			}
+// 		  ]
+// 		}
+// 	  ]
+// 	}
+//   ];
 	
+const [items, setItems] = useState([]);
+const getData = async () => {
+	const resp = await fetch('https://api.sampleapis.com/futurama/episodes');
+	const json = await resp.json();
+	const menuModel = convertToMenuModel(json);
+	setItems(menuModel);
+}
+
+
+function convertToMenuModel(data: any): any {
+    let menuModel: any = [];
+    Object.keys(data).forEach((key, index, array) => {
+        const value = data[key];
+        if (Array.isArray(value) || (typeof value === 'object' && value !== null)) {
+            const submenuItems = convertToMenuModel(value);
+            menuModel.push({ label: key, items: submenuItems });
+            if (index < array.length - 1) {
+                menuModel.push({ separator: true });
+            }
+        } else {
+            menuModel.push({ label: key + ': ' + value });
+            if (index < array.length - 1) {
+                menuModel.push({ separator: true });
+            }
+        }
+    });
+    return menuModel;
+}
+
+
+useEffect(() => {
+	getData();
+}, []);
 
 	return (
 	 	<Card>
 			<CardHeader
-				title='Weekly Overview'
+				title='Исторически данни'
 				titleTypographyProps={{
 					sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' }
 				}}
@@ -252,7 +475,7 @@ const items = [
 							{/* <h5>Basic</h5>
 							<SlideMenu model={items} viewportHeight={220} menuWidth={175}></SlideMenu> */}
 
-							<h5>Popup</h5>
+							<h5>Изберете данни</h5>
 							<SlideMenu
 								ref={menu}
 								model={items}
@@ -260,17 +483,20 @@ const items = [
 								viewportHeight={220}
 								menuWidth={175}
 								style={{
-									border: '1px solid #696969', 
-									backgroundColor: '#312D4B',
-									width: '11em',
-									color: 'rgba(231, 227, 252, 0.87)'
+									width: '12em',
+									overflow: 'auto',
+									scrollbarWidth: 'auto',
 								}}
 							></SlideMenu>
 							
-							<PrimeReactButton type="button" icon="pi pi-bars" label="Show" onClick={(event) =>{
+							<PrimeReactButton type="button" icon="pi pi-bars" label="Данни" onClick={(event) =>{
 								// @ts-ignore: Object is possibly 'null'.
 								 menu.current.toggle(event)}
-							}></PrimeReactButton>
+							}
+							style={{
+								color: 'white',
+								backgroundColor: '#804BDF'
+							}}></PrimeReactButton>
 						</div>
 					</div>
 				</Box>

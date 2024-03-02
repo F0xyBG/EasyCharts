@@ -90,7 +90,7 @@ const BarChart: React.FC<ChartProps> = ({
 	return (
 	 	<Card>
 			<CardHeader
-				title='Weekly Overview'
+				title='Колонна диаграма'
 				titleTypographyProps={{
 					sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' }
 				}}

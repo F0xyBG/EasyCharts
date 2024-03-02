@@ -53,6 +53,7 @@
     "@popperjs/core": "^2.11.2",
     "@types/chart.js": "^2.9.41",
     "apexcharts-clevision": "3.28.5",
+    "axios": "^1.6.7",
     "chart.js": "^3.9.1",
     "clsx": "^1.1.1",
     "mdi-material-ui": "^7.1.0",

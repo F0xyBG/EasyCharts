@@ -81,7 +81,7 @@ const PieChart: React.FC<ChartProps> = ({
 	return (
 	 	<Card>
 			<CardHeader
-				title='Weekly Overview'
+				title='Процентни данни'
 				titleTypographyProps={{
 					sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' }
 				}}
